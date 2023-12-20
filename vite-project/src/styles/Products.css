@@ -1,0 +1,32 @@
+.Global{
+    border: 3px solid #30302F;
+    margin: 70px;
+}
+
+.Product-Global{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.Product{
+    border: 3px solid #30302F;
+    border-radius: 20px;
+    margin: 10px;
+    text-align: center;
+    margin-bottom: 80px;
+    margin-top: 80px;
+    min-height: 350px;
+}
+
+img{
+    border-top-right-radius: 18px;
+    border-top-left-radius: 18px;
+    min-height: 200px;
+    max-height: 200px;
+}
+
+h1{
+    margin-top: 80px;
+}

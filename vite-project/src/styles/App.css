@@ -1,0 +1,16 @@
+.Links{
+    text-decoration: none;
+    margin: auto;
+}
+
+li{
+    margin:auto;
+    display: flex;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+nav{
+    background-color: #30302F;
+    display: flex;
+    height: 50px;
+}
