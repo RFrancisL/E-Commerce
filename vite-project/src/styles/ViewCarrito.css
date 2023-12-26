@@ -1,0 +1,40 @@
+.Global-ViewCarrito{
+    margin: 20px;
+}
+
+.Global-ProductList{
+    border: 3px solid #30302F;
+    display: flex;
+    flex-wrap: wrap; /* Permitir el ajuste de productos */
+    justify-content: space-around;
+}
+
+.ProductList{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.Footer{
+    text-align: end;
+}
+
+.Total-title{
+    align-items: center;
+    justify-content: center;
+}
+
+.Empty-btn{
+    margin-top: 20px;
+    width: 180px;
+    height: 50px;
+}
+button{
+    border: 3px solid #30302F;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h1, h3{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

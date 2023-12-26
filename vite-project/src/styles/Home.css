@@ -1,3 +1,35 @@
 h1 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+.Master-Logued{
+    margin: 80px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.Global-Logued{
+    display: flex;
+    margin-right: 35%;
+    margin-left: 45%;
+}
+.Logued-user{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.Home{
+    margin-right: 50%;
+}
+
+.title-two{
+    font-size: 70px;
+    margin: 5%;
+}
+.Home-btn{
+    width: 150px;
+    height: 40px;
+}

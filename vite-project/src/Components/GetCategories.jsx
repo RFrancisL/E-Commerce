@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from "react";
-import { Link} from "react-router-dom"
 import '../styles/Categories.css'
+import { Link } from "react-router-dom";
 
 const INIT = {
     data: [],
@@ -35,7 +35,7 @@ function useFetchDataCategories(){
 
         fetch('https://api.escuelajs.co/api/v1/categories')
             .then((res)=>{
-                if(!res){
+                if(!res.ok){
                     throw new Error('ERROR RESPONSE')
                 }
                 return res.json()
@@ -68,22 +68,29 @@ export default function GetCategories(){
     }
 
     return (
-        <div className="Global">
-            <div className="Categorie-Global">
-                {data.map((cat)=>{
-                    return (
-                        <>
-                            <div className="Categorie">
-                                <div key={cat.id} className="Categorie-Card">
-                                    <img src={cat.image} style={{width:'200px'}}/>
-                                    <h1>{cat.name}</h1>
-                                    <Link to={`/products?category=${cat.id}`}>{cat.name}</Link>
-                                </div>
-                            </div>  
-                        </>
-                    )
-                })}
+        <div>
+            <div>
+                <h1 style={{textAlign:'center', marginTop:'5%'}}>CATEGORIES</h1>
+                <p style={{textAlign:'center', fontSize:'20px'}}>Gets the best products by his categories!</p>
+            </div>
+            <div className="Global">
+                <div className="Categorie-Global">
+                    {data.map((cat)=>{
+                        return (
+                            <>
+                                <div className="Categorie">
+                                    <div key={cat.id} className="Categorie-Card">
+                                        <img src={cat.image} style={{width:'200px'}}/>
+                                        <h1>{cat.name}</h1>
+                                        <Link to={{pathname: `/categories/${cat.id}`}}>Ver Categoria</Link>
+                                    </div>
+                                </div>  
+                            </>
+                        )
+                    })}
+                </div>
             </div>
         </div>
     )
 }
+

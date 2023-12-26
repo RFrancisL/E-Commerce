@@ -1,0 +1,27 @@
+.Global-ProductID {
+    border: 3px solid #30302F;
+    border-radius: 50px;
+    padding: 20px;
+    margin: 100px;
+    margin-right: 200px;
+    margin-left: 200px;
+    display: flex;
+}
+.Card-ProductID {
+    margin-left: 20px;
+    flex: 1; /* Permitir que ocupe el espacio restante */
+}
+
+.Product-Title{
+    display: flex;
+}
+.Product-btn{
+    background-color: #30302F;
+    margin-left: 50%;
+    width: 150px;
+    height: 25px;
+}
+
+.Product-Image{
+    border-radius: 20px;
+}

@@ -1,31 +1,37 @@
-.Global{
+/* Global styles */
+.Global {
     border: 3px solid #30302F;
     margin: 70px;
 }
 
-.Categorie-Global{
+/* Product card styles */
+.Categorie-Global {
     display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
+    flex-wrap: wrap; /* Permitir el ajuste de productos */
+    justify-content: space-around; /* Distribuir uniformemente los productos */
 }
 
-.Categorie{
+.Categorie {
     border: 3px solid #30302F;
     border-radius: 20px;
     margin: 10px;
     text-align: center;
-    margin-bottom: 80px;
-    margin-top: 80px;
     min-height: 350px;
+    flex: 0 0 calc(30% - 20px); /* Ajustar el ancho de los productos según el contenedor */
+    max-width: calc(30% - 20px); /* Limitar el ancho máximo de los productos */
 }
 
-img{
+img {
     border-top-right-radius: 18px;
     border-top-left-radius: 18px;
     min-height: 200px;
+    max-height: 200px;
+    width: 100%; /* Ajustar el tamaño de las imágenes al contenedor */
+    object-fit: cover; /* Mantener la relación de aspecto */
 }
 
-h1{
-    margin-top: 80px;
+h1,
+h3 {
+    margin-top: 10px; /* Reducir el espacio superior */
+    margin-bottom: 10px; /* Agregar un espacio inferior uniforme */
 }

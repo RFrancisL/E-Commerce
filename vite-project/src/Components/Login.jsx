@@ -1,26 +1,58 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
+import {useMutation} from 'react-query'
 import '../styles/Login.css'
 
+
+const LoginMutation = async ({ email, password }) => {
+    try {
+        const res = await fetch('https://api.escuelajs.co/api/v1/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({ email, password })
+        });
+        if (!res.ok) {
+            throw new Error('ERROR RESPONSE');
+        }
+        return await res.json();
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+
 export default function Login(){
-    function handleSubmit(event){
-        event.preventDefault()
-    }
-    
     const [userName, setUserName] = useState('')
-    const [statePassword, setStatePassword] = useState('')
-
-    function handleLogin(userName, statePassword){
-        setUserName({userName});
-        setStatePassword({statePassword})
-    }
-
+    const [password, setPassword] = useState('')
+    
+    
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
 
+    const mutation = useMutation({
+        mutationFn: LoginMutation,
+        onSuccess: (data) => {
+            navigate(from, {replace:true}, {data})
+        },
+        onError: (error) => {
+            console.log(error)
+            return <h1>SOMETHING IS WRONG 😢, {error}</h1>
+        }
+    })
+
+    function handleSubmit(event){
+        event.preventDefault()
+        mutation.mutate({
+            email: userName,
+            password: password
+        })
+    }
+
     return (
-        <div className="Card">
+        <div className="Card-Login">
             <div className="Tittle">
                     <h1>E-Commerce</h1>
                     <p>Log in to Your Count! 😎</p>
@@ -30,6 +62,7 @@ export default function Login(){
                 <input
                     type="text"
                     placeholder="Username"
+                    className="input-login"
                     value={userName}
                     onChange={(event)=>{setUserName(event.target.value)}}
                 />
@@ -37,11 +70,15 @@ export default function Login(){
                 <input 
                     type="password"
                     placeholder="Password"
-                    value={statePassword}
-                    onChange={(event)=>setStatePassword(event.target.value)}/>
+                    className="input-login"
+                    value={password}
+                    onChange={(event)=>setPassword(event.target.value)}/>
             </form>
             <button type="submit" className="Enter-Btn" onClick={()=>{
-                handleLogin(userName, statePassword)
+                mutation.mutate({
+                    email: userName,
+                    password: password
+                })
                 navigate(from, {replace: true})
             }}>
                 <h3><Link to="/" style={{textDecoration:'none', color: '#30302F'}}>ENTER</Link></h3>
@@ -52,4 +89,5 @@ export default function Login(){
             </h3>
         </div>
     )
+    
 }

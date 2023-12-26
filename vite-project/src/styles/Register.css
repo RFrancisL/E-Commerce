@@ -1,16 +1,19 @@
-.Card-Login{
+.Card-Register{
     align-items: center;
     justify-content: center;
-    margin: 5% auto;
+    margin: 10% auto;
     text-align: center;
     border-radius: 40px;
     width: 30%;
 }
 
-.Form-Login{
+.Form-Register{
     margin-top: 10%;
 }
 
+.Card-Form{
+    margin: 30px;
+}
 .Enter-Btn{
     margin-top: 15%;
     margin-bottom: 20%;
@@ -25,7 +28,7 @@ h1, h3, p{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.input-login{
+input{
     border-color: #30302F;
     border-radius: 10px;
     border-style: solid;

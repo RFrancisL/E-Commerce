@@ -1,83 +1,92 @@
-import { useEffect, useReducer } from "react";
+import { useState } from "react"
+import "../styles/ProductsCreate.css"
+import { useProductContext } from "../Components/ProductContext"
+import { Link } from "react-router-dom"
 
-const INIT = {
-    data: [],
-    loading: false,
-    error: ''
-}
+export default function CreateProduct(){
+    const [productId, setProductId] = useState(crypto.randomUUID())
+    const [productName, setProductName] = useState('')
+    const [price, setPrice] = useState('')
+    const [description, setDescription] = useState('')
+    const [image, setImage] = useState('')
+    const {dispatch} = useProductContext()
 
-function reducer(state, action){
-    if (action.type === 'success'){
-        return {data: action.payload, loading: false, error:''}
-    }
+    
+    function handleSubmit(event){
+        event.preventDefault()
 
-    if (action.type === 'loading'){
-        return {data: [], loading: action.payload, error:''}
-    }
+        const newProduct = {
+            productId,
+            productName,
+            price,
+            description,
+            image
+        }
 
-    if (action.type === 'error'){
-        return {data:[], loading: false, error: action.payload}
-    }
-
-    return state;
-}
-
-function useFetchDataCreateProduct(){
-    const [state, dispatch] = useReducer(reducer, INIT);
-
-    useEffect(()=>{
-        dispatch({
-            type: 'loading',
-            payload: true
-        })
-
-        fetch('https://api.escuelajs.co/api/v1/products/')
-            .then((res)=>{
-                if(!res.ok){
-                    throw new Error("ERROR RESPONSE")
-                }
-                return res.json()
-            })
-            .then((data)=>{
-                dispatch({
-                    type: 'success',
-                    payload: data
-                })
-            })
-            .catch((error)=>{
-                dispatch({
-                    type: 'error',
-                    payload: error.message
-                })
-            })
-    },[])
-
-    return state
-}
-
-export default function ProductsCreate(){
-    const {data, loading, error} = useFetchDataCreateProduct();
-
-    if(loading){
-        return <h1>LOADING...</h1>
-    }
-
-    if(error){
-        return ({error})
+        dispatch({ type: 'ADD_PRODUCT', payload:newProduct})
     }
 
     return(
-        <div>
-            {data.map((prod)=>{
-                return (
-                    <div key={prod.categoryId}>
-                        <img src={prod.images}/>
-                        <h1>{prod.title}</h1>
-                        <h3>{prod.price}</h3>
-                        <h3>{prod.description}</h3>
-                    </div>
-                )
-            })}
-        </div>
+        <>
+            <div>
+                <h1 style={{textAlign:'center', fontSize:'50px', margin:'50px'}}>CREATE PRODUCT</h1>
+                <form onSubmit={handleSubmit} className="form-Create">
+                    <label className="label-Create">
+                        <h1>ID Product</h1>
+                        <input
+                            type="text"
+                            placeholder="Name Product"
+                            value={productId}
+                            className="input-Create"
+                        />
+                    </label>
+                    <label className="label-Create">
+                        <h1>Name Product</h1>
+                        <input
+                            type="text"
+                            placeholder="Name Product"
+                            value={productName}
+                            className="input-Create"
+                            onChange={(event)=>{
+                                setProductName(event.target.value)
+                            }}/>
+                    </label>
+                    <label className="label-Create">
+                        <h1>Price</h1>
+                        <input
+                            type="number"
+                            placeholder="Price"
+                            value={price}
+                            className="input-Create"
+                            onChange={(event)=>{
+                                setPrice(event.target.value)
+                            }}/>
+                    </label>
+                    <label className="label-Create">
+                        <h1>Description</h1>
+                        <textarea
+                            type="text"
+                            placeholder="Description"
+                            value={description}
+                            onChange={(event)=>{
+                                setDescription(event.target.value)
+                            }}/>
+                    </label>
+                    <label className="label-Create">
+                        <h1>Image</h1>
+                        <input
+                            type="file"
+                            placeholder="Image"
+                            value={image}
+                            className="input-Create"
+                            onChange={(event)=>{setImage(event.target.value)}}/>
+                    </label>
+                    <label className="label-Create">
+                        <button type="submit" className="btn-Create">ADD PRODUCT</button>
+                    </label>
+                    <Link to='/products' style={{marginLeft:'37%', marginRight:'29%'}}>VIEW PRODUCTS</Link>
+                </form>
+            </div>
+        </>
     )
 }
